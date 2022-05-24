@@ -105,6 +105,12 @@ class ConsentController extends Controller
         //
     }
 
+    public function eliminar($id){
+
+        $consents = Consent::find($id);
+        return view('consent.consent-destroy')->with('consents', $consents);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

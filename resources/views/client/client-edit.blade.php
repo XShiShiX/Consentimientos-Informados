@@ -2,8 +2,10 @@
 
 @section('content')
 
-    <h2 align="center">Editar Cliente</h2>
+    <div class="card mt-3 m-2 mb-4">
+    <h2 class="card-header" align="center">Editar Cliente</h2>
 
+    <div class="card-body">
     <form action="/client-edit/{{$client->id}}" method="POST">
 
         @csrf
@@ -625,13 +627,14 @@
 
 
 
-        <div class="col-12" align="center">
+        <div class="card-footer col-12" align="center">
             <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
             <a href="/client" class="btn btn-secondary" tabindex="5">Cancelar</a>
         </div>
 
     </form>
-
+    </div>
+    </div>
 
 
 @endsection

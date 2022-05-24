@@ -44,32 +44,7 @@
 
                         <div class="btn-group" role="group">
                             <a href="/consent-pdf/{{$consent->id}}" class="btn btn-info"><i class="fas fa-eye"> PDF</i> </a>
-
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$consent->id}}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-
-                        <div class="modal fade" id="exampleModal-{{$consent->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <ul class="list-group">
-                                                <h5 align="center">Esta seguro que desea eliminar el consentimiento seleccionado</h5>
-                                        </ul>
-                                    </div>
-                                    <div class="modal-footer">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <a href="/consent-destroy/{{$consent->id}}" class="btn btn-danger"><i class="fas fa-trash"></i> </a>
                         </div>
                         <!--<button type="submit" class="btn btn-danger">Borrar</button>-->
                     </form>

@@ -4,12 +4,13 @@
 @section('content')
 
 
+<div class="card mt-3 m-2 mb-4">
 
-    <form action="/client-destroy/{{$client->id}}" method="POST">
+<h3 class="card-header mb-4" align="center">¿Esta seguro que desea eliminar el cliente seleccionado?</h3><br>
 
-        <h1>Esta seguro que desea eliminar el cliente seleccionado</h1>
+<form action="/client-destroy/{{$client->id}}" method="POST">
 
-<div>
+<div class="card-body">
 
                     @foreach($consents as $consent)
                         @if($consent->cliente == $client->id)
@@ -35,7 +36,7 @@
 </div>
 
 
-<div align="center">
+<div class="card-footer" align="center">
         <form action="/client-destroy/{{$client->id}}" method="POST">
             @csrf
             @method('DELETE')
@@ -43,5 +44,6 @@
             <a href="/client" class="btn btn-secondary" tabindex="5">Cancelar</a>
         </form>
 </div>
-
+</form>
+    </div>
 @endsection

@@ -313,7 +313,7 @@
         </textarea>
 
 
-
+<!--
         <div class="visually-hidden-focusable" >
 
 
@@ -629,7 +629,7 @@
         </div>
 
     </div>
-</div>
+</div>-->
 
 <div class="card-footer">
 

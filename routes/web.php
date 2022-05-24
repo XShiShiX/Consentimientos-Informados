@@ -59,6 +59,9 @@ Route::put('/admin-edit/{id}', [AdminController::class, 'update']);
 //Rutas para el CRUD consentimientos (con resource)
 Route::resource('consent', ConsentController::class)->middleware('auth.check');
 Route::put('/consent-edit/{id}', [ConsentController::class, 'update']);
+Route::get('/consent-destroy/{id}', [ConsentController::class, 'eliminar'])->name('consent-destroy')->middleware('auth.check');
+Route::post('/consent-destroy/{id}', [ConsentController::class, 'eliminar'])->name('consent-destroy1')->middleware('auth.check');
+Route::delete('/consent/{id}', [ConsentController::class, 'destroy'])->name('consent-delete');
 
 //Rutas para el CRUD tratamientos (con resource)
 Route::resource('treatment', TreatmentController::class)->middleware('auth.check');
