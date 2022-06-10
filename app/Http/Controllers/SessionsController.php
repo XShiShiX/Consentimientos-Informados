@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,8 +12,8 @@ class SessionsController extends Controller
 {
     public function login()
     {
-
-        return view("auth.login");
+        $modules = Module::all();
+        return view("auth.login")->with('modules', $modules);
     }
 
     public function registration()

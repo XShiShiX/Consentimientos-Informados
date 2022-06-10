@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Module;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -22,8 +23,9 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $modules = Module::all();
         $users = User::all();
-        return view('admin.admin')->with('users', $users);
+        return view('admin.admin')->with('users', $users)->with('modules', $modules);
     }
 
     /**
@@ -33,7 +35,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.admin-create');
+        $modules = Module::all();
+        return view('admin.admin-create')->with('modules', $modules);
     }
 
     /**
@@ -81,8 +84,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
+        $modules = Module::all();
         $users = User::find($id);
-        return view('admin.admin-edit')->with('user', $users);
+        return view('admin.admin-edit')->with('user', $users)->with('modules', $modules);
     }
 
     /**

@@ -27,6 +27,7 @@
             </div>
             <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
             <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/de.js"></script>
+
             <script>
                 ClassicEditor
                     .create( document.querySelector( '#editorT' ), {

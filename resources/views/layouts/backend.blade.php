@@ -27,6 +27,21 @@
         }
     </script>
 
+    <style>
+        .file {
+            visibility: hidden;
+            position: absolute;
+        }
+    </style>
+
+    <style>
+        .thumb {
+            height: 300px;
+            border: 1px solid #000;
+            margin: 10px 5px 0 0;
+        }
+    </style>
+
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -162,21 +177,62 @@
     -->
     <nav id="sidebar" aria-label="Main Navigation">
       <!-- Side Header -->
+
       <div class="bg-header-dark">
+
         <div class="content-header bg-white-5">
           <!-- Logo -->
-          <a class="fw-semibold text-white tracking-wide" href="/">
+
+            @if(auth()->user()->role)
+                <textarea value="{{$var = 0}}" style="display: none"></textarea>
+                @forelse($modules as $module)
+                    <textarea value="{{$var = $var+1}}" style="display: none"></textarea>
+                @empty
+                @endforelse
+                @if($var == 0)
+
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Crear Modulo de Configuracion">
+             <a class="fw-semibold text-white tracking-wide" href="module/create">
+             <span class="smini-visible">
+              D<span class="opacity-75">x</span>
+             </span>
+             <span class="smini-hidden">
+              Consen<span class="nav-main-link-name opacity-75">timientos</span>
+
+                              <span class="position-absolute top start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                 <span class="visually-hidden">New alerts</span>
+             </span>
+                   </span>
+
+                @else
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Mostrar Modulo de Configuracion">
+                    <a class="fw-semibold text-white tracking-wide" href="module">
+              <span class="smini-visible">
+               D<span class="opacity-75">x</span>
+              </span>
+                        <span class="smini-hidden">
+                Consen<span class="opacity-75">timientos</span>
+                </span>
+                    </a>
+                    </span>
+                    @endif
+
+
+        @else
+                <a class="fw-semibold text-white tracking-wide" href="">
             <span class="smini-visible">
               D<span class="opacity-75">x</span>
             </span>
-            <span class="smini-hidden">
-              Dash<span class="opacity-75">mix</span>
+                    <span class="smini-hidden">
+              Consen<span class="opacity-75">timientos</span>
             </span>
-          </a>
+                </a>
+        @endif
           <!-- END Logo -->
 
           <!-- Options -->
           <div>
+
             <!-- Toggle Sidebar Style -->
             <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
             <!-- Class Toggle, functionality initialized in Helpers.dmToggleClass() -->
@@ -187,9 +243,9 @@
 
             <!-- Dark Mode -->
             <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#dark-mode-toggler" data-class="far fa" onclick="Dashmix.layout('dark_mode_toggle');">
+            <!--<button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#dark-mode-toggler" data-class="far fa" onclick="Dashmix.layout('dark_mode_toggle');">
               <i class="far fa-moon" id="dark-mode-toggler"></i>
-            </button>
+            </button>-->
             <!-- END Dark Mode -->
 
             <!-- Close Sidebar, Visible only on mobile screens -->
@@ -212,16 +268,16 @@
             <li class="nav-main-item">
               <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="/client-create">
                 <!--<i class="nav-main-link-icon fa fa-location-arrow"></i>-->
-                <span class="nav-main-link-name">Crear Cliente</span>
+                <span class="nav-main-link-name"><i class="fas fa-plus"></i> Crear Cliente </span>
                 <!--<span class="nav-main-link-badge badge rounded-pill bg-primary">5</span>-->
               </a>
 
                 <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="treatment/create">
-                    <span class="nav-main-link-name">Crear Tratamiento</span>
+                    <span class="nav-main-link-name"><i class="fas fa-plus"></i> Crear Tratamiento </span>
                 </a>
 
                 <a class="nav-main-link{{ request()->is('dashboard') ? ' active' : '' }}" href="consent/create">
-                    <span class="nav-main-link-name">Crear Consentimiento</span>
+                    <span class="nav-main-link-name"><i class="fas fa-plus"></i>  Crear Consentimiento</span>
                 </a>
             </li>
 
@@ -259,13 +315,37 @@
 
               </ul>
             </li>
-            <!--<li class="nav-main-heading">More</li>
-            <li class="nav-main-item">
-              <a class="nav-main-link" href="/">
-                <i class="nav-main-link-icon fa fa-globe"></i>
-                <span class="nav-main-link-name">Landing</span>
-              </a>
-            </li>-->
+
+              @if(auth()->user()->role)
+                  <textarea value="{{$var = 0}}" style="display: none"></textarea>
+                  @forelse($modules as $module)
+                      <textarea value="{{$var = $var+1}}" style="display: none"></textarea>
+                  @empty
+                  @endforelse
+                  @if($var == 0)
+                      <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Crear Modulo de Configuracion">
+                      <li class="nav-main-item">
+                          <a class="nav-main-link" href="module/create">
+                              <i class="nav-main-link-icon fa fa-globe"></i>
+                              <span class="nav-main-link-name">Modulo Empresarial</span>
+                              <span class="position-absolute top start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                 <span class="visually-hidden">New alerts</span>
+                 </span>
+                          </a>
+                      </li>
+                      </span>
+                  @else
+                      <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Mostrar Modulo de Configuracion">
+                  <li class="nav-main-item">
+                      <a class="nav-main-link" href="/module">
+                          <i class="nav-main-link-icon fa fa-globe"></i>
+                          <span class="nav-main-link-name">Modulo Empresarial</span>
+                      </a>
+                  </li>
+                      </span>
+              @endif
+              @endif
+
           </ul>
         </div>
         <!-- END Side Navigation -->
@@ -475,7 +555,7 @@
               <span data-toggle="year-copy"></span>
             </div>-->
         </div>
-      </div>
+
     </footer>
     <!-- END Footer -->
   </div>

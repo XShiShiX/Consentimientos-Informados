@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConsentController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PassController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\TreatmentController;
@@ -22,12 +23,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Example Routes
-Route::view('/', 'auth.login');
+Route::get('/', [SessionsController::class, 'login']);
 
 //Rutas para la autenticacion
 Route::get('/login', [SessionsController::class, 'login'])->name('login');
-//Route::get('/registration', [SessionsController::class, 'registration']);
-//Route::post('/register-user', [SessionsController::class, 'registerUser'])->name('register-user');
+Route::get('/registration', [SessionsController::class, 'registration']);
+Route::post('/register-user', [SessionsController::class, 'registerUser'])->name('register-user');
 Route::post('login-user', [SessionsController::class, 'loginUser'])->name('login-user');
 
 //Rutas para el CRUD de clientes (Sin Resource)
@@ -78,3 +79,7 @@ Route::post('/consent-pdf/{id}', [ConsentController::class, 'pdf'])->name('conse
 
 //Ruta para logout
 Route::get('/logout', [LogoutController::class, 'logout']);
+
+//Ruta para el Modulo de Configuraciones
+Route::resource('module', ModuleController::class)->middleware('auth.check');
+Route::put('/module-edit/{id}', [ModuleController::class, 'update']);

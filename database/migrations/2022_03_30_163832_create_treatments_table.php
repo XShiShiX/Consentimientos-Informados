@@ -19,7 +19,7 @@ class CreateTreatmentsTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('nombre');
-            $table->string('texto', 1000);
+            $table->longText('texto');
             $table->string('comentarios')->nullable();
             $table->string('fechacreacion')->default(date("d-m-y"));
             $table->string('usuariocreador')->nullable();

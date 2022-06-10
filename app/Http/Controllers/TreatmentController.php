@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Consent;
+use App\Models\Module;
 use App\Models\Treatment;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -24,9 +25,10 @@ class TreatmentController extends Controller
      */
     public function index()
     {
+        $modules = Module::all();
         $consents = Consent::all();
         $treatments = Treatment::all();
-        return view('treatment.treatment')->with('treatments', $treatments)->with('consents', $consents);
+        return view('treatment.treatment')->with('treatments', $treatments)->with('consents', $consents)->with('modules', $modules);
     }
 
     /**
@@ -36,7 +38,8 @@ class TreatmentController extends Controller
      */
     public function create()
     {
-        return view('treatment.treatment-create');
+        $modules = Module::all();
+        return view('treatment.treatment-create')->with('modules', $modules);
     }
 
     /**
@@ -74,8 +77,9 @@ class TreatmentController extends Controller
      */
     public function show($id)
     {
+        $modules = Module::all();
         $treatments = Treatment::find($id);
-        return view('treatment.treatment-show')->with('treatment', $treatments);
+        return view('treatment.treatment-show')->with('treatment', $treatments)->with('modules', $modules);
     }
 
     /**
@@ -86,8 +90,9 @@ class TreatmentController extends Controller
      */
     public function edit($id)
     {
+        $modules = Module::all();
         $treatments = Treatment::find($id);
-        return view('treatment.treatment-edit')->with('treatment', $treatments);
+        return view('treatment.treatment-edit')->with('treatment', $treatments)->with('modules', $modules);
     }
 
     /**

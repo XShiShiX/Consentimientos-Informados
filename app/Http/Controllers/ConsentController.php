@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Consent;
+use App\Models\Module;
 use App\Models\Treatment;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -28,9 +29,10 @@ class ConsentController extends Controller
     public function index()
     {
         $clients = Client::all();
+        $modules = Module::all();
         $treatments = Treatment::all();
         $consents = Consent::all();
-        return view('consent.consent')->with('consents', $consents)->with('clients', $clients)->with('treatments', $treatments);
+        return view('consent.consent')->with('modules', $modules)->with('consents', $consents)->with('clients', $clients)->with('treatments', $treatments);
     }
 
     /**
@@ -40,9 +42,10 @@ class ConsentController extends Controller
      */
     public function create()
     {
+        $modules = Module::all();
         $clients = Client::all();
         $treatments = Treatment::all();
-        return view('consent.consent-create', compact('clients','treatments'));
+        return view('consent.consent-create', compact('clients','treatments'))->with('modules', $modules);
     }
 
     /**
@@ -106,9 +109,9 @@ class ConsentController extends Controller
     }
 
     public function eliminar($id){
-
+        $modules = Module::all();
         $consents = Consent::find($id);
-        return view('consent.consent-destroy')->with('consents', $consents);
+        return view('consent.consent-destroy')->with('consents', $consents)->with('modules', $modules);
     }
 
     /**
@@ -132,11 +135,12 @@ class ConsentController extends Controller
      */
     public function pdf(int $id): Response
     {
+        $modules = Module::all();
         $consents = Consent::find($id);
         $treatments = Treatment::all();
         $clients = Client::all();
 
-        $pdf = PDF::loadView('consent.pdf', ['consents'=>$consents, 'treatments'=>$treatments, 'clients'=>$clients]);
+        $pdf = PDF::loadView('consent.pdf', ['consents'=>$consents, 'treatments'=>$treatments, 'clients'=>$clients, 'modules'=>$modules]);
         //$pdf->loadHTML('<h1>Test</h1>');
         return $pdf->stream();
 

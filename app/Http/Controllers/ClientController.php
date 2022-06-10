@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Client;
 use App\Models\Consent;
 use App\Models\Country;
+use App\Models\Module;
 use App\Models\State;
 use App\Models\Treatment;
 use App\Models\User;
@@ -32,6 +33,7 @@ class ClientController extends Controller
      */
     public function index()
     {
+        $modules = Module::all();
         $consents = Consent::all();
         $clients = Client::all();
         /*$clients = Client::select('*')->orderBy('id', 'DESC');
@@ -53,7 +55,7 @@ class ClientController extends Controller
                 ->orWhere('ultimocreador', 'like', '%', $request->search, '%');
         }
         $clients = $clients->paginate($limit)->appends($request->all());*/
-        return view('client.client', compact('clients'), compact('consents'));
+        return view('client.client', compact('clients'), compact('consents'))->with('modules', $modules);
     }
 
     /**
@@ -63,7 +65,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('client.client-create');
+        $modules = Module::all();
+        return view('client.client-create')->with('modules', $modules);
     }
 
     /**
@@ -141,8 +144,9 @@ class ClientController extends Controller
      */
     public function show($id)
     {
+        $modules = Module::all();
         $clients = Client::find($id);
-        return view('client.client-show')->with('client', $clients);
+        return view('client.client-show')->with('client', $clients)->with('modules', $modules);
     }
 
     /**
@@ -153,8 +157,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
+        $modules = Module::all();
         $clients = Client::find($id);
-        return view('client.client-edit')->with('client', $clients);
+        return view('client.client-edit')->with('client', $clients)->with('modules', $modules);
     }
 
     /**
@@ -201,9 +206,10 @@ class ClientController extends Controller
 
     public function eliminar($id){
 
+        $modules = Module::all();
         $treatments = Treatment::all();
         $consents = Consent::all();
         $client = Client::find($id);
-        return view('client.client-destroy')->with('consents', $consents)->with('client', $client)->with('treatments', $treatments);
+        return view('client.client-destroy')->with('consents', $consents)->with('client', $client)->with('treatments', $treatments)->with('modules', $modules);
 }
 }

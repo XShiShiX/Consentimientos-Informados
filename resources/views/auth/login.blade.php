@@ -77,21 +77,6 @@
         min-height: 1em;
     }
 
-    .reauth-email {
-        display: block;
-        color: #404040;
-        line-height: 2;
-        margin-bottom: 10px;
-        font-size: 14px;
-        text-align: center;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
     .form-signin #inputEmail,
     .form-signin #inputPassword {
         direction: ltr;
@@ -164,8 +149,20 @@
     <div class="card card-container">
         <div class="card-header ml-2 m-0 mb-4"> <h4>Intranet de Consentimientos Informados</h4></div>
 
+        <textarea value="{{$var = 0}}" style="display: none"></textarea>
+        @forelse($modules as $module)
+            <textarea value="{{$var = $var+1}}" style="display: none"></textarea>
+        @empty
+        @endforelse
+        @if($var == 0)
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        @else
+            @forelse($modules as $module)
+                <img id="" class="profile-img-card" src="{{ asset($module->logo) }}">
+            @empty
+            @endforelse
 
+        @endif
         <p id="profile-name" class="profile-name-card"></p>
 
         <form class="form-signin" action="{{route('login-user')}}" method="post">
